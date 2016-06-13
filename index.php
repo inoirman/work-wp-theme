@@ -18,13 +18,16 @@ get_header();
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
 					<!-- Заголовок -->
-					<?php the_title('<a href="<?php echo get_the_permalink(); ?>"><h2>', '</h2></a>'); ?>
+					<a href="<?php echo get_the_permalink(); ?>">
+						<?php the_title('<h2>', '</h2>'); ?>
+					</a>
 
-					<!-- Мета информация (автор, дата, категории) -->
+					<!-- Мета информация (автор, дата, категории, комментарии) -->
 					<div class="meta">
 						Автор: <a class="url fn n" href="<?php echo get_the_author_link(); ?>" ><?php echo get_the_author( );?></a><br>
 						Размещено: <?php echo get_the_date( 'M d, Y' ); ?><br>
-						<?php echo get_the_category_list( ', ' ); ?>
+						<?php echo get_the_category_list( ', ' ); ?><br>
+						Комментариев: <a href="<?php echo get_the_permalink(); ?>#comments"><?php $comments_count = wp_count_comments( $post->ID ); echo $comments_count->approved; ?></a>
 					</div> <!-- /.meta -->
 
 					<!-- Превьюшка (если есть) -->
