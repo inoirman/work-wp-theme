@@ -5,6 +5,7 @@
 *
 **/
 ?>
+    </div> <!-- /.container section main -->
 
 <?php wp_footer(); ?>
 </body>
