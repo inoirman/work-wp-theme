@@ -22,6 +22,10 @@
 	?>
 	<?php wp_list_comments( $args ); ?>
 	</ol>
-	<?php comment_form(); ?>
+	
 </div><!-- wrap-comments -->
-<?php }
+<?php } ?>
+
+<?php comment_form(); ?>
+
+<?php
