@@ -159,3 +159,51 @@ function posts_custom_column_views($column_name, $id){
         echo getPostViews(get_the_ID());
     }
 }
+
+
+function wfs_comments( $comment, $args, $depth ) {
+	  if ( 'div' === $args['style'] ) {
+      $tag       = 'div';
+      $add_below = 'comment';
+  } else {
+      $tag       = 'li';
+      $add_below = 'div-comment';
+  }
+  ?>
+  <<?php echo $tag ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
+  <?php if ( 'div' != $args['style'] ) : ?>
+    <div id="comment-<?php comment_ID() ?>">
+  <?php endif; ?>
+  		<div class="comment-author vcard">
+  			<?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+        <?php echo get_comment_author_link( ); ?>
+  			
+  		</div>
+  		<div class="comment-meta commentmetadata">
+  			<a href="<?php get_comment_link( ) ?>"> <?php echo get_comment_date( 'M d, Y' ); ?></a>
+  		</div>
+  		<div class="comment-body">
+  			<?php if ( $comment->comment_approved == '0' ) : ?>
+	   		<em class="comment-awaiting-moderation"><?php echo __( 'Your comment is awaiting moderation.', 'wfs-blogbit' ); ?></em>
+	    	<br />
+  			<?php endif; ?>
+	  		<?php comment_text(); ?>
+  		</div>
+  		<div class="reply">
+		    <?php comment_reply_link( array_merge( $args, array( 'add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+		  </div>
+  <?php if ( 'div' != $args['style'] ) : ?>
+  	</div>
+  <?php endif; ?>
+  <?php
+}
+
+/**
+*
+* Следующий фильтр возвращает порядок полей формы комментариев - Имя, Емейл, Сайт, Текст
+*
+**/
+
+add_filter('comment_form_fields', function($fields) {
+  return array_merge(array_splice($fields, 1), $fields);
+});
