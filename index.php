@@ -52,9 +52,7 @@ get_header();
 			</div> <!-- /.short-row -->
 		</div> <!-- /.box -->
 	</div> <!-- /.col-md-8 -->
-	<div class="col-md-4">
 		<?php get_sidebar(); ?>
-	</div> <!-- /.col-md-4 -->
 </div> <!-- /.row -->
 
 
